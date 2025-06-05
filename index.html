@@ -205,10 +205,15 @@
         .product-card:hover .product-image-3d img {
             transform: rotateY(20deg) scale(1.08);
         }
-        .product-card:first-child .product-image-3d img:hover {
-            transform: scale(1.5);
+        /* Add scroll-triggered super zoom animation for the first product image */
+        .product-card:first-child .product-image-3d img {
+            transition: transform 0.7s var(--transition), box-shadow 0.7s var(--transition);
+        }
+        .product-card:first-child .product-image-3d img.zoomed {
+            transform: scale(2);
             z-index: 10;
             position: relative;
+            box-shadow: 0 8px 32px rgba(123,67,151,0.25);
         }
         /* Add scroll-triggered animation for the first product card */
         .product-card:first-child {
@@ -578,6 +583,19 @@
         function closeQuiz() {
             quizModalBg.style.display = 'none';
         }
+
+        // Scroll-triggered zoom animation
+        const firstProductImage = document.querySelector('.product-card:first-child .product-image-3d img');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    firstProductImage.classList.add('zoomed');
+                } else {
+                    firstProductImage.classList.remove('zoomed');
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(firstProductImage);
     </script>
 </body>
 </html>
