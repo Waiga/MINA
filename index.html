@@ -396,6 +396,11 @@
             transform: none !important;
             transition: box-shadow 0.7s var(--transition);
         }
+        /* Improve contrast for cultural story section title */
+        .cultural-story-section .section-title {
+            color: #FFD700;
+            text-shadow: 0 2px 8px rgba(74,44,90,0.25), 0 1px 0 #4A2C5A;
+        }
     </style>
 </head>
 <body>
@@ -594,7 +599,7 @@
             quizModalBg.style.display = 'none';
         }
 
-        // Add scroll-based 3D zoom effect for hero image
+        // Add scroll-based 3D zoom effect for hero image (reactive)
         const heroImg = document.querySelector('.hero-img');
         function hero3DZoom() {
             if (!heroImg) return;
