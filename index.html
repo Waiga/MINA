@@ -205,6 +205,11 @@
         .product-card:hover .product-image-3d img {
             transform: rotateY(20deg) scale(1.08);
         }
+        .product-card:first-child .product-image-3d img:hover {
+            transform: scale(1.5);
+            z-index: 10;
+            position: relative;
+        }
         /* Add scroll-triggered animation for the first product card */
         .product-card:first-child {
             animation: fadeUp 1s 0.5s forwards, reveal3D 1.5s ease-out;
