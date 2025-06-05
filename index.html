@@ -88,6 +88,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
         }
         .hero-section h1 {
             font-size: 3.2rem;
@@ -95,13 +98,15 @@
             letter-spacing: -1px;
             font-weight: 700;
             line-height: 1.1;
-            background: var(--gradient-gold);
+            background: linear-gradient(90deg, #FFD700, #E8B4A0, #FFD700);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             opacity: 0;
             transform: translateY(40px);
-            animation: fadeUp 1s 0.1s forwards;
+            animation: fadeUp 1s 0.1s forwards, shimmer 3s infinite linear;
         }
         .hero-section p {
             font-size: 1.3rem;
@@ -130,10 +135,18 @@
             background: #eee;
             opacity: 0;
             transform: translateY(40px);
-            animation: fadeUp 1s 0.7s forwards;
+            animation: fadeUp 1s 0.7s forwards, zoomIn 1.5s ease-out;
         }
         @keyframes fadeUp {
             to { opacity: 1; transform: none; }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes zoomIn {
+            from { transform: scale(1.1); }
+            to { transform: scale(1); }
         }
         /* Best Sellers */
         .best-sellers-section {
@@ -163,9 +176,10 @@
             perspective: 800px;
             cursor: pointer;
             margin-bottom: 1.5rem;
+            transform-style: preserve-3d;
         }
         .product-card:hover {
-            transform: scale(1.05) rotateY(8deg);
+            transform: scale(1.05) rotateY(8deg) rotateX(5deg);
             box-shadow: 0 16px 48px rgba(123,67,151,0.25);
             z-index: 2;
         }
@@ -250,7 +264,7 @@
             background: #eee;
         }
         .after-img { opacity: 0; }
-        .before-after-item:hover .after-img { opacity: 1; }
+        .before-after-item:hover .after-img { opacity: 1; animation: crossfade 2s infinite; }
         /* Cultural Story */
         .cultural-story-section {
             background: var(--gradient-primary);
@@ -273,6 +287,7 @@
             margin-bottom: 1rem;
             object-fit: cover;
             background: #eee;
+            animation: float 3s ease-in-out infinite;
         }
         .brand-story {
             font-family: 'Cormorant Garamond', serif;
@@ -325,6 +340,16 @@
             font-size: 1.1rem;
             padding: 1rem 0;
             animation: fadeUp 0.7s;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes crossfade {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
         @media (max-width: 900px) {
             .cultural-story-content, .before-after-gallery, .best-sellers-carousel, .testimonials-carousel, .footer .footer-row {
@@ -521,58 +546,16 @@
             if (quizStep < quizData.length) {
                 const step = quizData[quizStep];
                 quizContent.innerHTML = `<div class="quiz-step"><h3>${step.q}</h3><div class="quiz-options">${step.options.map(opt => `<button onclick="selectQuizOption('${opt}')">${opt}</button>`).join('')}</div></div>`;
-            } else {
-                // Result
-                const browType = quizAnswers[0];
-                const shade = quizResults[browType] || 'Medium Brown';
-                quizContent.innerHTML = `<div class="quiz-step"><h3>Your Match:</h3><div style="font-size:1.2rem;margin-bottom:1rem;">Brow Type: <b>${browType}</b><br>Recommended Shade: <b>${shade}</b></div><button class="luxury-btn" onclick="closeQuiz()">Close</button></div>`;
             }
         }
-        function selectQuizOption(opt) {
-            quizAnswers[quizStep] = opt;
+        function selectQuizOption(option) {
+            quizAnswers.push(option);
             quizStep++;
             showQuizStep();
         }
-        quizBtn.onclick = function() {
-            quizStep = 0; quizAnswers = [];
-            showQuizStep();
-        };
-        function closeQuiz() { quizModalBg.style.display = 'none'; }
-        window.closeQuiz = closeQuiz;
-        window.selectQuizOption = selectQuizOption;
-
-        // Newsletter form
-        document.getElementById('newsletterForm').onsubmit = function(e) {
-            e.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('newsletterThankYou').style.display = 'block';
-            setTimeout(() => {
-                this.style.display = '';
-                document.getElementById('newsletterThankYou').style.display = 'none';
-                this.reset();
-            }, 3000);
-        };
-        // B2B form
-        document.getElementById('b2bForm').onsubmit = function(e) {
-            e.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('b2bThankYou').style.display = 'block';
-            setTimeout(() => {
-                this.style.display = '';
-                document.getElementById('b2bThankYou').style.display = 'none';
-                this.reset();
-            }, 3000);
-        };
-        // Animate sections on scroll (Apple-style)
-        function animateOnScroll() {
-            const sections = document.querySelectorAll('.section-title, .section-subtitle');
-            let delay = 0;
-            sections.forEach((el, i) => {
-                el.style.setProperty('--delay', `${delay}s`);
-                delay += 0.1;
-            });
+        function closeQuiz() {
+            quizModalBg.style.display = 'none';
         }
-        window.addEventListener('DOMContentLoaded', animateOnScroll);
     </script>
 </body>
-</html> 
+</html>
