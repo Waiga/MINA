@@ -135,11 +135,14 @@
             object-fit: cover;
             min-height: 320px;
             background: #eee;
-            opacity: 0;
-            transform: translateY(40px) scale(1) rotateY(0deg) rotateX(0deg);
-            animation: fadeUp 1s 0.7s forwards, zoomIn 1.5s ease-out;
-            transition: transform 0.2s cubic-bezier(.4,0,.2,1), opacity 0.7s;
+            opacity: 1;
+            transform: scale(1) rotateY(0deg) rotateX(0deg);
+            transition: transform 0.7s cubic-bezier(.4,0,.2,1), box-shadow 0.7s, opacity 0.7s;
             will-change: transform;
+        }
+        .hero-img:hover {
+            transform: scale(1.2) rotateY(16deg) rotateX(8deg);
+            box-shadow: 0 16px 64px rgba(123,67,151,0.25);
         }
         .hero-img.super-zoomed {
             transform: scale(2.5) rotateY(32deg) !important;
@@ -198,13 +201,14 @@
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(74,44,90,0.12);
             margin-bottom: 1rem;
-            transition: transform 0.7s var(--transition);
+            transition: transform 0.7s cubic-bezier(.4,0,.2,1), box-shadow 0.7s;
             min-height: 180px;
             object-fit: cover;
             background: #eee;
         }
         .product-card:hover .product-image-3d img {
-            transform: rotateY(20deg) scale(1.08);
+            transform: scale(1.08) rotateY(12deg) rotateX(6deg);
+            box-shadow: 0 8px 32px rgba(123,67,151,0.18);
         }
         /* Add scroll-triggered super zoom animation for the first product image */
         .product-card:first-child .product-image-3d img {
@@ -288,11 +292,15 @@
         }
         .before-img, .after-img {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; transition: opacity 0.5s;
+            top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; transition: transform 0.7s cubic-bezier(.4,0,.2,1), box-shadow 0.7s;
             background: #eee;
         }
         .after-img { opacity: 0; }
-        .before-after-item:hover .after-img { opacity: 1; animation: crossfade 2s infinite; }
+        .before-after-item:hover .before-img,
+        .before-after-item:hover .after-img {
+            transform: scale(1.08) rotateY(12deg) rotateX(6deg);
+            box-shadow: 0 8px 32px rgba(123,67,151,0.18);
+        }
         /* Cultural Story */
         .cultural-story-section {
             background: var(--gradient-primary);
