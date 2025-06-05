@@ -136,7 +136,7 @@
             min-height: 320px;
             background: #eee;
             opacity: 0;
-            transform: translateY(40px) scale(1) rotateY(0deg);
+            transform: translateY(40px) scale(1) rotateY(0deg) rotateX(0deg);
             animation: fadeUp 1s 0.7s forwards, zoomIn 1.5s ease-out;
             transition: transform 0.2s cubic-bezier(.4,0,.2,1), opacity 0.7s;
             will-change: transform;
@@ -187,9 +187,6 @@
             cursor: pointer;
             margin-bottom: 1.5rem;
             transform-style: preserve-3d;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 1s 0.5s forwards;
         }
         .product-card:hover {
             transform: scale(1.05) rotateY(8deg) rotateX(5deg);
@@ -201,7 +198,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(74,44,90,0.12);
             margin-bottom: 1rem;
-            transition: transform 0.7s var(--transition), box-shadow 0.7s var(--transition);
+            transition: transform 0.7s var(--transition);
             min-height: 180px;
             object-fit: cover;
             background: #eee;
@@ -599,27 +596,31 @@
             quizModalBg.style.display = 'none';
         }
 
-        // Add scroll-based 3D zoom effect for hero image (reactive)
+        // Add parallax, scale, and oscillating 3D rotation effect for hero image on scroll
         const heroImg = document.querySelector('.hero-img');
-        function hero3DZoom() {
+        function heroWowEffect() {
             if (!heroImg) return;
             const rect = heroImg.getBoundingClientRect();
             const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-            // Calculate how much of the hero image is visible (0 = not visible, 1 = fully visible)
             let visible = 0;
             if (rect.top < windowHeight && rect.bottom > 0) {
                 const visiblePx = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
                 visible = Math.max(0, Math.min(1, visiblePx / rect.height));
             }
-            // Interpolate scale and rotateY based on visibility
-            const scale = 1 + visible * 1.5; // from 1 to 2.5
-            const rotateY = visible * 32; // from 0deg to 32deg
-            heroImg.style.transform = `translateY(40px) scale(${scale}) rotateY(${rotateY}deg)`;
+            // Parallax: move image slower than scroll
+            const parallaxY = (1 - visible) * 80; // up to 80px upward
+            // Scale: subtle zoom in as it becomes visible
+            const scale = 1 + visible * 0.25; // from 1 to 1.25
+            // Oscillating 3D rotation: gentle rotateY and rotateX
+            const scrollY = window.scrollY || window.pageYOffset;
+            const rotateY = Math.sin(scrollY / 180) * 16 * visible; // -16deg to 16deg
+            const rotateX = Math.cos(scrollY / 220) * 10 * visible; // -10deg to 10deg
+            heroImg.style.transform = `translateY(${parallaxY}px) scale(${scale}) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
             heroImg.style.opacity = visible > 0.1 ? 1 : 0;
         }
-        window.addEventListener('scroll', hero3DZoom);
-        window.addEventListener('resize', hero3DZoom);
-        window.addEventListener('DOMContentLoaded', hero3DZoom);
+        window.addEventListener('scroll', heroWowEffect);
+        window.addEventListener('resize', heroWowEffect);
+        window.addEventListener('DOMContentLoaded', heroWowEffect);
     </script>
 </body>
 </html>
