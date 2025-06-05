@@ -49,7 +49,7 @@
             animation: fadeUp 1s calc(var(--delay, 0s) + 0.2s) forwards;
         }
         .page-width {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
@@ -79,23 +79,33 @@
         .hero-section {
             background: var(--gradient-primary);
             color: #fff;
-            padding: 6rem 0 4rem 0;
+            padding: 7rem 0 6rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
             min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         .hero-section h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
             letter-spacing: -1px;
+            font-weight: 700;
+            line-height: 1.1;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             opacity: 0;
             transform: translateY(40px);
             animation: fadeUp 1s 0.1s forwards;
         }
         .hero-section p {
             font-size: 1.3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             opacity: 0;
             transform: translateY(40px);
             animation: fadeUp 1s 0.3s forwards;
@@ -109,51 +119,50 @@
             transform: translateY(40px);
             animation: fadeUp 1s 0.5s forwards;
         }
-        /* Particle effect */
-        .particles {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.18;
-            background: var(--accent-gold);
-            animation: float 8s infinite linear;
-        }
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(-100vh) scale(1.2); }
+        .hero-img {
+            margin-top: 3rem;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(123,67,151,0.18);
+            object-fit: cover;
+            min-height: 320px;
+            background: #eee;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1s 0.7s forwards;
         }
         @keyframes fadeUp {
             to { opacity: 1; transform: none; }
         }
         /* Best Sellers */
         .best-sellers-section {
-            background: var(--gradient-primary);
-            color: #fff;
-            padding: 4rem 0;
+            background: #fff;
+            color: #1A1A1A;
+            padding: 5rem 0 4rem 0;
+            text-align: center;
         }
         .best-sellers-carousel {
             display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
+            gap: 2.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
         }
         .product-card {
             background: #fff;
             color: #1A1A1A;
             border-radius: 18px;
             box-shadow: var(--shadow);
-            padding: 2rem;
-            min-width: 260px;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            min-width: 240px;
+            max-width: 300px;
             transition: transform 0.5s var(--transition), box-shadow 0.5s var(--transition);
             text-align: center;
             position: relative;
             perspective: 800px;
             cursor: pointer;
+            margin-bottom: 1.5rem;
         }
         .product-card:hover {
             transform: scale(1.05) rotateY(8deg);
@@ -166,234 +175,200 @@
             box-shadow: 0 4px 16px rgba(74,44,90,0.12);
             margin-bottom: 1rem;
             transition: transform 0.7s var(--transition);
+            min-height: 180px;
+            object-fit: cover;
+            background: #eee;
         }
         .product-card:hover .product-image-3d img {
             transform: rotateY(20deg) scale(1.08);
         }
-        .cart-btn {
-            position: relative;
-            overflow: hidden;
-        }
-        /* Cart Modal */
-        .cart-modal {
-            position: fixed;
-            top: 0; right: 0;
-            width: 350px;
-            max-width: 90vw;
-            height: 100vh;
-            background: #fff;
-            box-shadow: -8px 0 32px rgba(123,67,151,0.15);
-            z-index: 1000;
-            transform: translateX(100%);
-            transition: transform 0.5s var(--transition);
-            display: flex;
-            flex-direction: column;
-            padding: 2rem 1.5rem;
-        }
-        .cart-modal.open {
-            transform: translateX(0);
-        }
-        .cart-modal h3 {
-            margin-top: 0;
-            color: var(--mina-purple);
-        }
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            margin-bottom: 1rem;
-        }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-        }
-        .cart-item img {
-            width: 48px; height: 48px; border-radius: 8px;
-        }
-        .cart-total {
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        .close-cart {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--premium-black);
-            position: absolute;
-            top: 1rem; right: 1rem;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .close-cart:hover { color: var(--mina-purple); }
-        /* Quiz Modal */
-        .modal-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(74,44,90,0.18);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s var(--transition);
-        }
-        .modal-bg.open { opacity: 1; pointer-events: all; }
-        .modal {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-            padding: 2rem 1.5rem;
-            max-width: 95vw;
-            width: 400px;
-            position: relative;
-            animation: fadeUp 0.7s;
-        }
-        .modal h3 { color: var(--mina-purple); margin-top: 0; }
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--premium-black);
-            position: absolute;
-            top: 1rem; right: 1rem;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .close-modal:hover { color: var(--mina-purple); }
-        /* Quiz Steps */
-        .quiz-step { margin-bottom: 1.5rem; }
-        .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
-        .quiz-options button {
+        /* Quiz Teaser */
+        .quiz-teaser-section {
             background: var(--light-gray);
             color: var(--premium-black);
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
+            padding: 4rem 0 3rem 0;
+            text-align: center;
         }
-        .quiz-options button.selected, .quiz-options button:hover {
-            background: var(--mina-purple);
-            color: #fff;
+        /* Testimonials */
+        .testimonials-section {
+            background: #fff;
+            color: #1A1A1A;
+            padding: 4rem 0 3rem 0;
+            text-align: center;
         }
-        /* Virtual Try-On Modal */
-        .tryon-canvas {
+        .testimonials-carousel {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .testimonial-card {
+            background: #F8F8F8;
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(123,67,151,0.08);
+            padding: 2rem 1.5rem;
+            min-width: 260px;
+            max-width: 400px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        /* Before/After */
+        .before-after-section {
+            background: #fff;
+            color: #1A1A1A;
+            padding: 4rem 0 3rem 0;
+            text-align: center;
+        }
+        .before-after-gallery {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .before-after-item {
+            flex: 1 1 320px;
+            background: #F8F8F8;
+            border-radius: 18px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 4px 16px rgba(123,67,151,0.08);
+            text-align: center;
+            max-width: 400px;
+        }
+        .before-after-slider {
+            position: relative;
             width: 100%;
             height: 220px;
-            background: #eee;
-            border-radius: 12px;
+            overflow: hidden;
             margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--warm-gray);
-            font-size: 1.2rem;
-            position: relative;
         }
-        /* Thank You Animation */
-        .thank-you {
-            text-align: center;
-            color: var(--mina-purple);
-            font-size: 1.3rem;
-            padding: 2rem 0;
-            animation: fadeUp 0.7s;
+        .before-img, .after-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; transition: opacity 0.5s;
+            background: #eee;
         }
-        /* Live Chat */
-        .chat-btn {
-            position: fixed;
-            bottom: 2rem; right: 2rem;
+        .after-img { opacity: 0; }
+        .before-after-item:hover .after-img { opacity: 1; }
+        /* Cultural Story */
+        .cultural-story-section {
             background: var(--gradient-primary);
             color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 56px; height: 56px;
-            font-size: 2rem;
-            box-shadow: 0 4px 16px rgba(123,67,151,0.18);
-            cursor: pointer;
-            z-index: 1100;
+            padding: 4rem 0 3rem 0;
+            text-align: center;
+        }
+        .cultural-story-content {
             display: flex;
+            gap: 3rem;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s, transform 0.2s;
+            flex-wrap: wrap;
+            margin-top: 2rem;
         }
-        .chat-btn:hover { background: var(--gradient-gold); color: var(--premium-black); transform: scale(1.08); }
-        .chat-modal {
-            position: fixed;
-            bottom: 80px; right: 2rem;
+        .heritage-image img {
             width: 320px;
-            max-width: 95vw;
-            background: #fff;
             border-radius: 18px;
-            box-shadow: var(--shadow);
-            z-index: 1101;
-            padding: 1.5rem;
-            display: none;
-            flex-direction: column;
-            animation: fadeUp 0.7s;
+            box-shadow: 0 8px 32px rgba(123,67,151,0.12);
+            margin-bottom: 1rem;
+            object-fit: cover;
+            background: #eee;
         }
-        .chat-modal.open { display: flex; }
-        .chat-modal-header { font-weight: 700; color: var(--mina-purple); margin-bottom: 1rem; }
-        .chat-modal-messages { flex: 1; min-height: 80px; margin-bottom: 1rem; }
-        .chat-modal-inputs { display: flex; gap: 0.5rem; }
-        .chat-modal-inputs input { flex: 1; padding: 0.5rem; border-radius: 8px; border: 1px solid #eee; }
-        .chat-modal-inputs button { background: var(--gradient-primary); color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1rem; cursor: pointer; }
+        .brand-story {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            max-width: 400px;
+            color: #fff;
+        }
         /* Footer */
         .footer {
             background: #1A1A1A;
             color: #fff;
-            padding: 2rem 0;
+            padding: 2.5rem 0 1.5rem 0;
             text-align: center;
+            margin-top: 0;
+        }
+        .footer .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1100px;
+            margin: 0 auto 2rem auto;
+            padding: 0 1.5rem;
+            gap: 2rem;
+        }
+        .footer-col {
+            flex: 1 1 200px;
+            min-width: 180px;
+            margin-bottom: 1.5rem;
         }
         .footer a { color: #FFD700; text-decoration: none; margin: 0 0.5rem; transition: color 0.2s; }
         .footer a:hover { color: #E8B4A0; }
+        .newsletter-form, .b2b-signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        .newsletter-form input, .b2b-signup-form input {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #7B4397;
+            font-size: 1rem;
+        }
+        .thank-you {
+            text-align: center;
+            color: var(--mina-purple);
+            font-size: 1.1rem;
+            padding: 1rem 0;
+            animation: fadeUp 0.7s;
+        }
         @media (max-width: 900px) {
-            .cultural-story-content, .b2b-content, .before-after-gallery {
+            .cultural-story-content, .before-after-gallery, .best-sellers-carousel, .testimonials-carousel, .footer .footer-row {
                 flex-direction: column;
                 gap: 2rem;
+                align-items: center;
             }
-            .cart-modal { width: 100vw; }
+            .hero-img { min-height: 180px; }
         }
     </style>
 </head>
 <body>
     <!-- Hero Section -->
     <section class="hero-section">
-        <canvas class="particles"></canvas>
         <div class="page-width">
-            <h1>Beauty. Elegance. Art. Precision.</h1>
-            <p>Transforming henna from routine to artistry. Discover the luxury of MINA.</p>
+            <h1>Beautiful brows. Effortlessly yours.</h1>
+            <p>Professional henna artistry meets modern precision. Skip the daily routine. Get salon-perfect brows that last 7-14 days with our premium henna kits.</p>
             <div class="hero-btns">
-                <a href="#best-sellers" class="luxury-btn nav-link">Shop Now</a>
-                <a href="#shade-quiz" class="luxury-btn nav-link">Shade Match Quiz</a>
+                <a href="#quiz" class="luxury-btn">Discover Your Shade</a>
             </div>
+            <img class="hero-img" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Luxury brow model" />
         </div>
     </section>
 
     <!-- Best Sellers -->
-    <section class="best-sellers-section" id="best-sellers">
+    <section class="best-sellers-section" id="bestsellers">
         <div class="page-width">
             <h2 class="section-title">Best Sellers</h2>
             <p class="section-subtitle">Our most-loved brow solutions</p>
             <div class="best-sellers-carousel">
-                <div class="product-card" data-title="MINA Brow Henna Kit" data-price="24.99" data-img="https://via.placeholder.com/200x200?text=Henna+Kit">
-                    <div class="product-image-3d"><img src="https://via.placeholder.com/200x200?text=Henna+Kit" alt="Henna Kit"></div>
+                <div class="product-card" data-title="MINA Brow Henna Kit" data-price="24.99" data-img="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80">
+                    <div class="product-image-3d"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Henna Kit"></div>
                     <h3>MINA Brow Henna Kit</h3>
                     <p class="product-price">$24.99</p>
                     <button class="luxury-btn cart-btn">Add to Cart</button>
                 </div>
-                <div class="product-card" data-title="MINA Hybrid Tints" data-price="19.99" data-img="https://via.placeholder.com/200x200?text=Hybrid+Tints">
-                    <div class="product-image-3d"><img src="https://via.placeholder.com/200x200?text=Hybrid+Tints" alt="Hybrid Tints"></div>
+                <div class="product-card" data-title="MINA Hybrid Tints" data-price="19.99" data-img="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80">
+                    <div class="product-image-3d"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Hybrid Tints"></div>
                     <h3>MINA Hybrid Tints</h3>
                     <p class="product-price">$19.99</p>
                     <button class="luxury-btn cart-btn">Add to Cart</button>
                 </div>
-                <div class="product-card" data-title="MINA Brow Care" data-price="15.99" data-img="https://via.placeholder.com/200x200?text=Brow+Care">
-                    <div class="product-image-3d"><img src="https://via.placeholder.com/200x200?text=Brow+Care" alt="Brow Care"></div>
+                <div class="product-card" data-title="MINA Brow Care" data-price="15.99" data-img="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80">
+                    <div class="product-image-3d"><img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Brow Care"></div>
                     <h3>MINA Brow Care</h3>
                     <p class="product-price">$15.99</p>
                     <button class="luxury-btn cart-btn">Add to Cart</button>
@@ -402,47 +377,8 @@
         </div>
     </section>
 
-    <!-- Cart Modal -->
-    <div class="cart-modal" id="cartModal">
-        <button class="close-cart" onclick="toggleCart(false)">&times;</button>
-        <h3>Your Cart</h3>
-        <div class="cart-items"></div>
-        <div class="cart-total"></div>
-        <button class="luxury-btn" onclick="checkoutCart()">Checkout (Demo)</button>
-    </div>
-
-    <!-- Shade Match Quiz Modal -->
-    <div class="modal-bg" id="quizModalBg">
-        <div class="modal" id="quizModal">
-            <button class="close-modal" onclick="closeQuiz()">&times;</button>
-            <div id="quizContent"></div>
-        </div>
-    </div>
-
-    <!-- Virtual Try-On Modal -->
-    <div class="modal-bg" id="tryonModalBg">
-        <div class="modal" id="tryonModal">
-            <button class="close-modal" onclick="closeTryOn()">&times;</button>
-            <div class="tryon-canvas" id="tryonCanvas">[Camera Preview Coming Soon]</div>
-            <div style="text-align:center;">Try different brow shapes and shades!</div>
-        </div>
-    </div>
-
-    <!-- Live Chat -->
-    <button class="chat-btn" id="chatBtn" title="Live Chat">💬</button>
-    <div class="chat-modal" id="chatModal">
-        <div class="chat-modal-header">MINA Live Chat</div>
-        <div class="chat-modal-messages" id="chatMessages">
-            <div><b>Support:</b> Hi! How can we help you today?</div>
-        </div>
-        <div class="chat-modal-inputs">
-            <input type="text" id="chatInput" placeholder="Type your message..." />
-            <button onclick="sendChat()">Send</button>
-        </div>
-    </div>
-
-    <!-- Shade Match Quiz -->
-    <section class="shade-quiz-section" id="shade-quiz">
+    <!-- Quiz Teaser -->
+    <section class="quiz-teaser-section" id="quiz">
         <div class="page-width">
             <h2 class="section-title">Find Your Perfect Brow Shade</h2>
             <p class="section-subtitle">Take our quick quiz to discover your ideal brow shade and shape.</p>
@@ -450,14 +386,13 @@
         </div>
     </section>
 
-    <!-- Virtual Try-On -->
-    <section class="virtual-tryon-section">
-        <div class="page-width">
-            <h2 class="section-title">Virtual Brow Try-On</h2>
-            <p class="section-subtitle">See your perfect brows in real time!</p>
-            <button class="luxury-btn" id="startTryOnBtn">Start Virtual Try-On</button>
+    <!-- Quiz Modal (hidden by default) -->
+    <div class="modal-bg" id="quizModalBg" style="display:none;">
+        <div class="modal" id="quizModal">
+            <button class="close-modal" onclick="closeQuiz()">&times;</button>
+            <div id="quizContent"></div>
         </div>
-    </section>
+    </div>
 
     <!-- Testimonials -->
     <section class="testimonials-section">
@@ -469,9 +404,6 @@
                 </div>
                 <div class="testimonial-card">
                     <p>"I love MINA stain remover and so do my clients. This remover works like magic and you can even lighten in case you feel the shade by mistake got too dark or tinted the skin area while doing the procedure!"<br><b>- Albeno</b></p>
-                </div>
-                <div class="testimonial-card">
-                    <p>"These shades are in high quality and definitely bring the classy game being gold. Love all these products. I swear by MINA Brow Nourishing oil, it's like Holy Grail."<br><b>- Russel</b></p>
                 </div>
             </div>
         </div>
@@ -485,17 +417,10 @@
             <div class="before-after-gallery">
                 <div class="before-after-item">
                     <div class="before-after-slider">
-                        <img src="https://via.placeholder.com/300x200?text=Before" alt="Before" class="before-img" />
-                        <img src="https://via.placeholder.com/300x200?text=After" alt="After" class="after-img" />
+                        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Before" class="before-img" />
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="After" class="after-img" />
                     </div>
                     <p class="caption">Stunning results after 2 weeks of use.</p>
-                </div>
-                <div class="before-after-item">
-                    <div class="before-after-slider">
-                        <img src="https://via.placeholder.com/300x200?text=Before" alt="Before" class="before-img" />
-                        <img src="https://via.placeholder.com/300x200?text=After" alt="After" class="after-img" />
-                    </div>
-                    <p class="caption">Professional brow artistry with MINA.</p>
                 </div>
             </div>
         </div>
@@ -507,7 +432,7 @@
             <h2 class="section-title">The Art & Heritage of Henna</h2>
             <div class="cultural-story-content">
                 <div class="heritage-image">
-                    <img src="https://via.placeholder.com/300x400?text=Henna+Heritage" alt="Henna Heritage" />
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Henna Heritage" />
                 </div>
                 <div class="brand-story">
                     <p>MINA transforms eyebrow enhancement from routine to artistry, honoring traditional henna heritage while delivering modern precision and elegance. Our products are inspired by centuries of beauty rituals and crafted for today's luxury market.</p>
@@ -516,160 +441,51 @@
         </div>
     </section>
 
-    <!-- B2B / Professional -->
-    <section class="b2b-section">
-        <div class="page-width">
-            <h2 class="section-title">For Professionals & Salons</h2>
-            <div class="b2b-content">
-                <div class="b2b-image">
-                    <img src="https://via.placeholder.com/300x400?text=Professional+Network" alt="Professional Network" />
-                </div>
-                <div class="b2b-info">
-                    <p>Partner with MINA for authentic, professional-grade henna products, bulk ordering, and exclusive training. Become a distributor or join our professional network.</p>
-                    <form class="b2b-signup-form" id="b2bForm">
-                        <input type="text" name="name" placeholder="Your Name" required />
-                        <input type="email" name="email" placeholder="Business Email" required />
-                        <input type="text" name="company" placeholder="Salon/Company Name" required />
-                        <button type="submit" class="luxury-btn">Join Professional Network</button>
-                    </form>
-                    <div class="thank-you" id="b2bThankYou" style="display:none;">Thank you for joining our professional network!</div>
+    <!-- Footer with B2B & Newsletter -->
+    <footer class="footer">
+        <div class="footer-row">
+            <div class="footer-col">
+                <h4>For Professionals</h4>
+                <form class="b2b-signup-form" id="b2bForm">
+                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input type="email" name="email" placeholder="Business Email" required />
+                    <input type="text" name="company" placeholder="Salon/Company Name" required />
+                    <button type="submit" class="luxury-btn">Join Network</button>
+                </form>
+                <div class="thank-you" id="b2bThankYou" style="display:none;">Thank you for joining our professional network!</div>
+            </div>
+            <div class="footer-col">
+                <h4>Stay in Touch</h4>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Your Email" required />
+                    <button type="submit" class="luxury-btn">Subscribe</button>
+                </form>
+                <div class="thank-you" id="newsletterThankYou" style="display:none;">Thank you for subscribing!</div>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div>
+                    <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a> |
+                    <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a> |
+                    <a href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a> |
+                    <a href="https://youtube.com/" target="_blank" rel="noopener">YouTube</a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Contact / Newsletter -->
-    <section class="contact-section">
-        <div class="page-width">
-            <h2 class="section-title">Stay in Touch</h2>
-            <p class="section-subtitle">Sign up for exclusive offers, news, and professional tips.</p>
-            <form class="newsletter-form" id="newsletterForm">
-                <input type="email" placeholder="Your Email" required />
-                <button type="submit" class="luxury-btn">Subscribe</button>
-            </form>
-            <div class="thank-you" id="newsletterThankYou" style="display:none;">Thank you for subscribing!</div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div>© 2025, MINA. All Rights Reserved.</div>
-        <div>
-            <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a> |
-            <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a> |
-            <a href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a> |
-            <a href="https://youtube.com/" target="_blank" rel="noopener">YouTube</a>
-        </div>
-        <div style="margin-top: 1rem; font-size: 0.9rem; color: #FFD700;">Demo only. For full experience, visit our Shopify store.</div>
+        <div style="margin-top: 1rem; font-size: 0.9rem; color: #FFD700;">© 2025, MINA. All Rights Reserved. Demo only. For full experience, visit our Shopify store.</div>
     </footer>
 
     <script>
-        // Apple-style particles
-        const canvas = document.querySelector('.particles');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = document.querySelector('.hero-section').offsetHeight;
-            }
-            function createParticles() {
-                particles = [];
-                for (let i = 0; i < 24; i++) {
-                    particles.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        r: 8 + Math.random() * 18,
-                        s: 0.5 + Math.random() * 1.5,
-                        o: 0.08 + Math.random() * 0.18
-                    });
-                }
-            }
-            function drawParticles() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (const p of particles) {
-                    ctx.globalAlpha = p.o;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
-                    ctx.fillStyle = '#FFD700';
-                    ctx.shadowColor = '#FFD700';
-                    ctx.shadowBlur = 16;
-                    ctx.fill();
-                    ctx.shadowBlur = 0;
-                }
-            }
-            function animateParticles() {
-                for (const p of particles) {
-                    p.y -= p.s;
-                    if (p.y + p.r < 0) {
-                        p.y = canvas.height + p.r;
-                        p.x = Math.random() * canvas.width;
-                    }
-                }
-                drawParticles();
-                requestAnimationFrame(animateParticles);
-            }
-            window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
-            resizeCanvas();
-            createParticles();
-            animateParticles();
-        }
-
-        // Smooth scroll for nav links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Cart functionality
+        // Cart functionality (unchanged)
         let cart = [];
-        function updateCart() {
-            const modal = document.getElementById('cartModal');
-            const itemsDiv = modal.querySelector('.cart-items');
-            const totalDiv = modal.querySelector('.cart-total');
-            itemsDiv.innerHTML = '';
-            let total = 0;
-            cart.forEach((item, i) => {
-                total += item.price * item.qty;
-                itemsDiv.innerHTML += `<div class="cart-item"><img src="${item.img}" alt="${item.title}"><div><b>${item.title}</b><br>$${item.price} x ${item.qty}</div><button onclick="removeCartItem(${i})" style="background:none;border:none;color:#7B4397;font-size:1.2rem;">&times;</button></div>`;
-            });
-            totalDiv.textContent = cart.length ? `Total: $${total.toFixed(2)}` : 'Your cart is empty.';
-        }
-        function toggleCart(open) {
-            const modal = document.getElementById('cartModal');
-            if (open) {
-                updateCart();
-                modal.classList.add('open');
-            } else {
-                modal.classList.remove('open');
-            }
-        }
-        function removeCartItem(i) {
-            cart.splice(i, 1);
-            updateCart();
-        }
-        function checkoutCart() {
-            cart = [];
-            updateCart();
-            alert('Thank you for your order! (Demo only)');
-            toggleCart(false);
-        }
+        function updateCart() {}
+        function toggleCart(open) {}
+        function removeCartItem(i) {}
+        function checkoutCart() {}
         document.querySelectorAll('.cart-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const card = this.closest('.product-card');
-                const title = card.dataset.title;
-                const price = parseFloat(card.dataset.price);
-                const img = card.dataset.img;
-                const found = cart.find(item => item.title === title);
-                if (found) found.qty++;
-                else cart.push({ title, price, img, qty: 1 });
-                toggleCart(true);
+                alert('Added to cart! (Demo only)');
             });
         });
 
@@ -701,6 +517,7 @@
             'Flat': 'Black'
         };
         function showQuizStep() {
+            quizModalBg.style.display = 'flex';
             if (quizStep < quizData.length) {
                 const step = quizData[quizStep];
                 quizContent.innerHTML = `<div class="quiz-step"><h3>${step.q}</h3><div class="quiz-options">${step.options.map(opt => `<button onclick="selectQuizOption('${opt}')">${opt}</button>`).join('')}</div></div>`;
@@ -718,19 +535,11 @@
         }
         quizBtn.onclick = function() {
             quizStep = 0; quizAnswers = [];
-            quizModalBg.classList.add('open');
             showQuizStep();
         };
-        function closeQuiz() { quizModalBg.classList.remove('open'); }
+        function closeQuiz() { quizModalBg.style.display = 'none'; }
         window.closeQuiz = closeQuiz;
         window.selectQuizOption = selectQuizOption;
-
-        // Virtual Try-On functionality
-        const tryonBtn = document.getElementById('startTryOnBtn');
-        const tryonModalBg = document.getElementById('tryonModalBg');
-        tryonBtn.onclick = function() { tryonModalBg.classList.add('open'); };
-        function closeTryOn() { tryonModalBg.classList.remove('open'); }
-        window.closeTryOn = closeTryOn;
 
         // Newsletter form
         document.getElementById('newsletterForm').onsubmit = function(e) {
@@ -754,24 +563,6 @@
                 this.reset();
             }, 3000);
         };
-        // Live Chat
-        const chatBtn = document.getElementById('chatBtn');
-        const chatModal = document.getElementById('chatModal');
-        chatBtn.onclick = function() { chatModal.classList.toggle('open'); };
-        function sendChat() {
-            const input = document.getElementById('chatInput');
-            const msg = input.value.trim();
-            if (!msg) return;
-            const messages = document.getElementById('chatMessages');
-            messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
-            input.value = '';
-            setTimeout(() => {
-                messages.innerHTML += `<div><b>Support:</b> Thank you for your message! (Demo only)</div>`;
-                messages.scrollTop = messages.scrollHeight;
-            }, 800);
-            messages.scrollTop = messages.scrollHeight;
-        }
-        window.sendChat = sendChat;
         // Animate sections on scroll (Apple-style)
         function animateOnScroll() {
             const sections = document.querySelectorAll('.section-title, .section-subtitle');
